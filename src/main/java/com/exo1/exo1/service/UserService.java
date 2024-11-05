@@ -1,5 +1,6 @@
 package com.exo1.exo1.service;
 
+import com.exo1.exo1.Utils;
 import com.exo1.exo1.dto.UserDto;
 import com.exo1.exo1.entity.User;
 import com.exo1.exo1.mapper.UserMapper;
@@ -22,6 +23,7 @@ public class UserService {
     private TaskRepository taskRepository;
     private ProjetRepository projetRepository;
     private UserMapper userMapper;
+    private Utils utils;
 
     public List<UserDto> findAll(Pageable pageable) {
         return userMapper.toDtos(userRepository.findAll(pageable).getContent());
@@ -62,5 +64,6 @@ public class UserService {
 
     public void delete(Long id) {
         userRepository.deleteById(id);
+        utils.refreshMaterializedView();
     }
 }
