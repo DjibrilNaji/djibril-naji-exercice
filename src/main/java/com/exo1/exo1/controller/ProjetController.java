@@ -1,10 +1,9 @@
 package com.exo1.exo1.controller;
 
 import com.exo1.exo1.dto.ProjetDto;
-import com.exo1.exo1.dto.UserDto;
 import com.exo1.exo1.service.ProjetService;
-import com.exo1.exo1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +16,12 @@ public class ProjetController {
     private ProjetService projetService;
 
     @GetMapping
-    public ResponseEntity<List<ProjetDto>> findAll()
-    {
-        return ResponseEntity.ok(projetService.findAll());
+    public ResponseEntity<List<ProjetDto>> findAll(Pageable pageable) {
+        return ResponseEntity.ok(projetService.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProjetDto> findById(@PathVariable Long id)
-    {
+    public ResponseEntity<ProjetDto> findById(@PathVariable Long id) {
         return ResponseEntity.ok(projetService.findById(id));
     }
 
